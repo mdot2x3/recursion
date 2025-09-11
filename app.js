@@ -10,7 +10,7 @@ function fibs(fibNum) {
   return fibArray;
 }
 
-// console.log(fibs(8));
+console.log(fibs(8));
 
 // Fibonacci Sequence using recursion
 function fibsRec(fibNum) {
@@ -24,4 +24,38 @@ function fibsRec(fibNum) {
   }
 }
 
-// console.log(fibsRec(8));
+console.log(fibsRec(8));
+
+//----------------------------------------------
+
+// merge sort
+function mergeSort(array) {
+  if (array.length <= 1) return array;
+  else {
+    let mid = Math.floor(array.length / 2);
+    let left = array.slice(0, mid);
+    let right = array.slice(mid);
+
+    // run recursion on arrays until they reduce to 1 element
+    let recLeft = mergeSort(left);
+    let recRight = mergeSort(right);
+    // after both reach their base case, values are inserted into merge()
+    return merge(recLeft, recRight);
+  }
+
+  function merge(left, right) {
+    let mergedArray = [];
+    // while both arrays have elements
+    while (left.length && right.length) {
+      if (left[0] <= right[0]) {
+        mergedArray.push(left.shift());
+      } else {
+        mergedArray.push(right.shift());
+      }
+    }
+    // when one array is empty, concatenate the remainder of the other array
+    return mergedArray.concat(left, right);
+  }
+}
+
+console.log(mergeSort([105, 79, 100, 110]));
